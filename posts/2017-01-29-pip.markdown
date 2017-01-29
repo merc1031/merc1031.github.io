@@ -1,0 +1,26 @@
+---
+title: Pip install to local dir on xenial
+---
+
+Basically i hate virtual env
+
+```
+mkdir .pip
+apt-get remove python3-pip python-pip
+sudo apt-get remove python3-pip python-pip
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+sudo python get-pip.py
+sudo python3 get-pip.py
+sudo ln -snf  /usr/local/bin/pip2 /usr/local/bin/pip
+pip install -t .pip {PACKAGE}
+PYTHONPATH=.:./.pip:$PYTHONPATH python
+```
+
+Note some things are dumb (zope is missing an __init__.py. dumb)
+
+```
+pip install -t .pip zope.interface
+touch .pip/zope/__init__.py
+PYTHONPATH=.:./.pip:$PYTHONPATH python
+```
