@@ -37,6 +37,12 @@ resolver: nightly-2017-01-17
 # will not be run. This is useful for tweaking upstream packages.
 packages:
 - '.'
+# https://github.com/sebastiaanvisser/clay/issues/135
+- location:
+    git: git@github.com:sebastiaanvisser/clay.git
+    commit: 165ec808f28a311fc531d67e872c5a4e75d1e8e5
+  extra-dep: true
+
 # Dependency packages to be pulled from upstream that are not in the resolver
 # (e.g., acme-missiles-0.3)
 extra-deps: []

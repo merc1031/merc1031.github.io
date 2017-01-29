@@ -11,9 +11,15 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
-    match "css/*" $ do
+    match "css/*.css" $ do
         route   idRoute
         compile compressCssCompiler
+
+    match "css/*.hs" $ do
+        route   $ setExtension "css"
+        compile $ getResourceString >>=
+          -- % stack runghc --package clay --package text css/style.hs
+          withItemBody (unixFilter "stack" ["runghc", "--package", "clay", "--package", "text"])
 
     match (fromList ["about.rst", "contact.markdown"]) $ do
         route   $ setExtension "html"
